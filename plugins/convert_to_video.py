@@ -49,7 +49,7 @@ async def convert_to_video(bot, update):
         try:
            new_file_name = msg.split(" ", 1)[1]
         except:
-            await message.reply("Format: `/file2vid NewFileName`")
+            await update.reply("Format: `/file2vid NewFileName.ext`")
             return
         download_location = new_file_name
         a = await bot.send_message(
