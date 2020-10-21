@@ -11,7 +11,7 @@ An Open Source Telegram RoBot  😍
 
 #### The Easy Way
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/thatshowitworks/Convert-2-Video)
 
 ## Our Telegram Channel and Group
 
