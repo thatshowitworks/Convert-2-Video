@@ -43,6 +43,7 @@ async def convert_to_video(bot, update):
     TRChatBase(update.from_user.id, update.text, "converttovideo")
     if update.reply_to_message is not None:
         msg = update.text
+        reply_message = update.reply_to_message
         description = Translation.CUSTOM_CAPTION_UL_FILE
         original_file_name = reply_message.document["file_name"]
         try:
