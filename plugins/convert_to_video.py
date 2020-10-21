@@ -49,7 +49,7 @@ async def convert_to_video(bot, update):
            new_file_name = msg.split(" ", 1)[1]
         except:
             await message.reply("Format: `/file2vid NewFileName`")
-	    return
+            return
         download_location = new_file_name
         a = await bot.send_message(
             chat_id=update.chat.id,
@@ -88,7 +88,7 @@ async def convert_to_video(bot, update):
             metadata = extractMetadata(createParser(the_real_download_location))
             if metadata.has("duration"):
                 duration = metadata.get('duration').seconds
-            thumb_image_path = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
+            thumb_image_path = "perma_thumb.jpg"
             if not os.path.exists(thumb_image_path):
                 thumb_image_path = await take_screen_shot(
                     the_real_download_location,
