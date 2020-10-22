@@ -28,7 +28,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from helper_funcs.chat_base import TRChatBase
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["generatecustomthumbnail"]))
+@pyrogram.Client.on_message(pyrogram.Filters.command(["setthumb"]))
 async def generate_custom_thumbnail(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
         await bot.delete_messages(
@@ -87,41 +87,6 @@ async def generate_custom_thumbnail(bot, update):
         )
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.photo)
-async def save_photo(bot, update):
-    if update.from_user.id in Config.BANNED_USERS:
-        await bot.delete_messages(
-            chat_id=update.chat.id,
-            message_ids=update.message_id,
-            revoke=True
-        )
-        return
-    app = user_approved(update)
-    if not app and update.from_user.id not in Config.AUTH_USERS:
-         return
-    TRChatBase(update.from_user.id, update.text, "save_photo")
-    if update.media_group_id is not None:
-        # album is sent
-        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + "/" + str(update.media_group_id) + "/"
-        # create download directory, if not exist
-        if not os.path.isdir(download_location):
-            os.makedirs(download_location)
-        await bot.download_media(
-            message=update,
-            file_name=download_location
-        )
-    else:
-        # received single photo
-        download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id) + ".jpg"
-        await bot.download_media(
-            message=update,
-            file_name=download_location
-        )
-        await bot.send_message(
-            chat_id=update.chat.id,
-            text=Translation.SAVED_CUSTOM_THUMB_NAIL,
-            reply_to_message_id=update.message_id
-        )
 
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["deletethumbnail"]))
@@ -136,7 +101,7 @@ async def delete_thumbnail(bot, update):
             revoke=True
         )
         return
-    TRChatBase(update.from_user.id, update.text, "deletethumbnail")
+    TRChatBase(update.from_user.id, update.text, "delthumb")
     download_location = Config.DOWNLOAD_LOCATION + "/" + str(update.from_user.id)
     try:
         os.remove(download_location + ".jpg")
