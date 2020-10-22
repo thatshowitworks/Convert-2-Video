@@ -40,7 +40,7 @@ async def convert_to_video(bot, update):
             reply_to_message_id=update.message_id
         )
         return
-    app = user_approved(update.from_user.id)
+    app = user_approved(update)
     if not app and update.from_user.id not in Config.AUTH_USERS:
          return
     TRChatBase(update.from_user.id, update.text, "converttovideo")
