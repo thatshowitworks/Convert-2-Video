@@ -1,5 +1,6 @@
 from pyrogram import filters
 from bot import app
+from helper_funcs.sql.approve import add_user, remove_user
 
 @app.on_message(filters.command("adduser"))
 async def add(client, update):
