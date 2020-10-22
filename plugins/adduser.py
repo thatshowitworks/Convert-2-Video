@@ -1,4 +1,4 @@
-from pyrogram import filters
+from pyrogram import Filters
 from bot import app
 from helper_funcs.sql.approve import add_user, remove_user
 
