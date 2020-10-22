@@ -24,7 +24,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from helper_funcs.chat_base import TRChatBase
 from helper_funcs.display_progress import progress_for_pyrogram
 from helper_funcs.help_Nekmo_ffmpeg import take_screen_shot
-
+from helper_funcs.sql.approve import user_approved
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 # https://stackoverflow.com/a/37631799/4723940
@@ -40,6 +40,9 @@ async def convert_to_video(bot, update):
             reply_to_message_id=update.message_id
         )
         return
+    app = user_approved(update.from_user.id)
+    if not app and update.from_user.id not in Config.AUTH_USERS:
+         return
     TRChatBase(update.from_user.id, update.text, "converttovideo")
     if update.reply_to_message is not None:
         msg = update.text
