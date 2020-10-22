@@ -30,10 +30,11 @@ async def remove(client, update):
 	         await update.reply("User unapproved to use bot")
 	     else:
 	       try:
-	         user_id = msg.split(" ", 1)[1]
-	         add_user(user_id)
+	         user_id = int(msg.split(" ", 1)[1])
+	         remove_user(user_id)
 	         await update.reply("User unapproved to use bot")
-	       except:
+               except:
 	         await update.reply("Format: `/rmuser user id`")
 	         return
+	       
 	     	     
