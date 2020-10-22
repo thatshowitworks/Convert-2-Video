@@ -76,13 +76,13 @@ async def generate_custom_thumbnail(bot, update):
         else:
             await bot.send_message(
                 chat_id=update.chat.id,
-                text=Translation.REPLY_TO_MEDIA_ALBUM_TO_GEN_THUMB,
+                text="Reply to a media",
                 reply_to_message_id=update.message_id
             )
     else:
         await bot.send_message(
             chat_id=update.chat.id,
-            text=Translation.REPLY_TO_MEDIA_ALBUM_TO_GEN_THUMB,
+            text="Reply to a media",
             reply_to_message_id=update.message_id
         )
 
