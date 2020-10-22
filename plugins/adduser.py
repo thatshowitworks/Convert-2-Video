@@ -13,13 +13,11 @@ async def add(client, update):
 	         add_user(reply_message.from_user["id"], "k")
 	         await update.reply("User approved to use bot")
 	     else:
-	       try:
+	       
 	         user_id = msg.split(" ", 1)[1], "k"
 	         add_user(user_id)
 	         await update.reply("User approved to use bot")
-	       except:
-	         await update.reply("Format: `/adduser user id`")
-	         return
+	       
 
 @Client.on_message(Filters.command("rmuser"))
 async def remove(client, update):
