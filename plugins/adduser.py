@@ -1,10 +1,11 @@
 from pyrogram import Filters, Client
 
 from helper_funcs.sql.approve import add_user, remove_user
+from sample_config import Config
 
 @Client.on_message(Filters.command("adduser"))
 async def add(client, update):
-	     if update.from_user['id'] not in AUTH_USERS:
+	     if update.from_user['id'] not in Config.AUTH_USERS:
 		       return
 	     msg = update.text
 	     reply_message = update.reply_to_message
@@ -22,7 +23,7 @@ async def add(client, update):
 
 @Client.on_message(Filters.command("rmuser"))
 async def remove(client, update):
-	     if update.from_user['id'] not in AUTH_USERS:
+	     if update.from_user['id'] not in Config.AUTH_USERS:
 		       return
 	     msg = update.text
 	     reply_message = update.reply_to_message
