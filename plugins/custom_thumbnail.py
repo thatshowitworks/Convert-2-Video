@@ -37,7 +37,7 @@ async def generate_custom_thumbnail(bot, update):
             revoke=True
         )
         return
-    app = user_approved(update.from_user.id)
+    app = user_approved(update)
     if not app and update.from_user.id not in Config.AUTH_USERS:
          return
     TRChatBase(update.from_user.id, update.text, "generatecustomthumbnail")
@@ -96,7 +96,7 @@ async def save_photo(bot, update):
             revoke=True
         )
         return
-    app = user_approved(update.from_user.id)
+    app = user_approved(update)
     if not app and update.from_user.id not in Config.AUTH_USERS:
          return
     TRChatBase(update.from_user.id, update.text, "save_photo")
@@ -126,7 +126,7 @@ async def save_photo(bot, update):
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["deletethumbnail"]))
 async def delete_thumbnail(bot, update):
-    app = user_approved(update.from_user.id)
+    app = user_approved(update)
     if not app and update.from_user.id not in Config.AUTH_USERS:
          return
     if update.from_user.id in Config.BANNED_USERS:
