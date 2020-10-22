@@ -12,7 +12,7 @@ import numpy
 import os
 from PIL import Image
 import time
-
+from helper_funcs.sql.approve import user_approved
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
     from sample_config import Config
@@ -37,6 +37,9 @@ async def generate_custom_thumbnail(bot, update):
             revoke=True
         )
         return
+    app = user_approved(update.from_user.id)
+    if not app and update.from_user.id not in Config.AUTH_USERS:
+         return
     TRChatBase(update.from_user.id, update.text, "generatecustomthumbnail")
     if update.reply_to_message is not None:
         reply_message = update.reply_to_message
@@ -93,6 +96,9 @@ async def save_photo(bot, update):
             revoke=True
         )
         return
+    app = user_approved(update.from_user.id)
+    if not app and update.from_user.id not in Config.AUTH_USERS:
+         return
     TRChatBase(update.from_user.id, update.text, "save_photo")
     if update.media_group_id is not None:
         # album is sent
@@ -120,6 +126,9 @@ async def save_photo(bot, update):
 
 @pyrogram.Client.on_message(pyrogram.Filters.command(["deletethumbnail"]))
 async def delete_thumbnail(bot, update):
+    app = user_approved(update.from_user.id)
+    if not app and update.from_user.id not in Config.AUTH_USERS:
+         return
     if update.from_user.id in Config.BANNED_USERS:
         await bot.delete_messages(
             chat_id=update.chat.id,
