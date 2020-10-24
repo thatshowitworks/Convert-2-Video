@@ -1,9 +1,9 @@
-from pyrogram import Filters, Client
+from pyrogram import filters, Client
 
 from helper_funcs.sql.approve import add_user, remove_user
 from sample_config import Config
 
-@Client.on_message(Filters.command("adduser"))
+@Client.on_message(filters.command("adduser"))
 async def add(client, update):
 	     if update.from_user['id'] not in Config.AUTH_USERS:
 		       return
@@ -21,7 +21,7 @@ async def add(client, update):
 	         await update.reply("Format: `/adduser user id`")
 	         return
 
-@Client.on_message(Filters.command("rmuser"))
+@Client.on_message(filters.command("rmuser"))
 async def remove(client, update):
 	     if update.from_user['id'] not in Config.AUTH_USERS:
 		       return
