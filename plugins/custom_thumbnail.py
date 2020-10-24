@@ -28,7 +28,7 @@ logging.getLogger("pyrogram").setLevel(logging.WARNING)
 from helper_funcs.chat_base import TRChatBase
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["setthumb"]))
+@pyrogram.Client.on_message(pyrogram.filters.command(["setthumb"]))
 async def save_photo(bot, update):
     if update.from_user.id in Config.BANNED_USERS:
         await bot.delete_messages(
@@ -68,7 +68,7 @@ async def save_photo(bot, update):
 
 
 
-@pyrogram.Client.on_message(pyrogram.Filters.command(["delthumb"]))
+@pyrogram.Client.on_message(pyrogram.filters.command(["delthumb"]))
 async def delete_thumbnail(bot, update):
     app = user_approved(update)
     if not app and update.from_user.id not in Config.AUTH_USERS:
