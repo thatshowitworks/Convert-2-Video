@@ -1,5 +1,5 @@
 
-from pyrogram import Message
+from pyrogram.types import Message
 from sqlalchemy import (
     Column,
     String,
