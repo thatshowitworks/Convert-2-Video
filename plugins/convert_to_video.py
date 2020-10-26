@@ -48,7 +48,10 @@ async def convert_to_video(bot, update):
         msg = update.text
         reply_message = update.reply_to_message
         description = Translation.CUSTOM_CAPTION_UL_FILE
-        original_file_name = reply_message.document["file_name"]
+        try:
+          original_file_name = reply_message.document["file_name"]
+        except TypeError:
+           original_file_name = reply_message.video["file_name"]
         try:
            new_file_name = msg.split(" ", 1)[1]
         except:
