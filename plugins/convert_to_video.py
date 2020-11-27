@@ -143,6 +143,24 @@ async def convert_to_video(bot, update):
                     c_time
                 )
             )
+            await bot.send_video(
+                chat_id=update.chat.id,
+                video=the_real_download_location,
+                caption=description,
+                duration=duration,
+                width=width,
+                height=height,
+                supports_streaming=True,
+                # reply_markup=reply_markup,
+                thumb=thumb_image_path,
+                reply_to_message_id=update.reply_to_message.message_id,
+                progress=progress_for_pyrogram,
+                progress_args=(
+                    Translation.UPLOAD_START,
+                    a,
+                    c_time
+                )
+            )
             try:
                 os.remove(the_real_download_location)
               #  os.remove(thumb_image_path)
